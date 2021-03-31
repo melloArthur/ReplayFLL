@@ -52,6 +52,30 @@ def Acelera(qp_max, qf)
         gabriel.drive(vec_array[i],0)
         wait(dt*1000)
 
+    # tentativa de fazer o loop pela posição e não pela velocidade #########################################
+    # q_ant = 0
+    # space_array = []
+    # while t < tf:
+    #     # qp = round(3*a3*t**2 + 4*a4*t**3 + (5*a5*t**4), 2)
+        
+    #     q = a3*t**3 + a4*t**4 + a5*t**5
+    #     dist = q - q_ant
+        
+    #     vec_array.append(dist)
+    #     t += dt
+    #     q_ant = q
+
+    # for i in range(0, len(space_array)):
+    #     gabriel.straight(space_array[i])
+    #     wait(dt*1000)
+    # tentativa de fazer o loop pela posição e não pela velocidade #########################################
+
+    # tentativa p/ o giro sem gyro ##################################################
+    # gabriel.turn(ang, vel)
+
+    # tentativa p/ o giro sem gyro ##################################################
+
+
 def SegLinhaPID(potencia, vezes)
     #Definir valores de calibração
     kp =
