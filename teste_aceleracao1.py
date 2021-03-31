@@ -90,7 +90,7 @@ def Curva(angF,vel)
     while t < tf:
         q = ai + a3*t**3 + a4*t**4+a5*t**5
         dist = q - q_ant
-        vec_array.append(dist)
+        angArray.append(dist)
         t += dt
         q_ant = q
     
