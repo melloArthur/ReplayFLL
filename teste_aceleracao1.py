@@ -72,7 +72,30 @@ def Acelera(qp_max, qf)
     # tentativa de fazer o loop pela posição e não pela velocidade #########################################
 
     # tentativa p/ o giro sem gyro ##################################################
-    # gabriel.turn(ang, vel)
+def Curva(angF,vel)
+    ai = 0 # Ângulo inicial em graus
+
+    Da = angF - ai #Variação do ângulo
+
+    tf = 15 * Da / (8 * vel)
+    a3 = 16 * vel / (3 * tf**2)
+    a4 = -8 * vel / (tf**3)
+    a5 = 16 * vel / (5 * tf**4)
+
+    t = 0
+    dt = 0.01
+    angArray = []
+    q_ant = 0
+
+    while t < tf:
+        q = ai + a3*t**3 + a4*t**4+a5*t**5
+        dist = q - q_ant
+        vec_array.append(dist)
+        t += dt
+        q_ant = q
+    
+    for i in range(0, len(angArray)):
+        gabriel.turn(angArray[i])
 
     # tentativa p/ o giro sem gyro ##################################################
 
