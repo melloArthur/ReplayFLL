@@ -7,14 +7,15 @@ from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
 
-esquerda = Motor(Port.B)
-direita = Motor(Port.C)
+
+esquerda = Motor(Port.B, Direction.COUNTERCLOCKWISE)
+direita = Motor(Port.C, Direction.COUNTERCLOCKWISE)
 MotorMA = Motor(Port.A)
 MotorMD = Motor(Port.D)
-EsqCor = ColorSensor(Port.S1)
-DirCor = ColorSensor(Port.S4)
+# EsqCor = ColorSensor(Port.S1)
+# DirCor = ColorSensor(Port.S4)
 
-gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) 
+gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) #Ajustar valores
 
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
@@ -28,7 +29,7 @@ ev3 = EV3Brick()
 # Write your program here.
 ev3.speaker.beep()
 
-def Acelera(qp_max, qf):
+def Acelera_e_Curva(qp_max, qf, ang):
     
     
     # dados iniciais ----------------------
@@ -58,6 +59,28 @@ def Acelera(qp_max, qf):
     for i in range(0, len(vec_array)):
         gabriel.drive(vec_array[i],0)
         wait(dt*1000)
+    else:
+        gabriel.turn(ang)
+
+def latencia():
+    wait(200)
 
 
 ev3.speaker.beep()
+
+#Codigo saida 4
+# latencia()
+Acelera_e_Curva(250, 380, 22) #Anda ate o banco e derruba o banco
+# latencia()
+# Acelera_e_Curva(450, -330, -55) #Volta pra base e vira em direção a pista de dança
+gabriel.straight(-330)
+gabriel.turn(-48)
+# latencia()
+Acelera_e_Curva(650, 960, 43) #Anda em diração a pista de dança
+Acelera_e_Curva(200, 90, 0)
+# latencia()
+for i in range(4):
+    gabriel.turn(45) #Dansa gatinho dansa
+    latencia()
+    gabriel.turn(-45) #Dansa gatinho dansa
+    latencia()
