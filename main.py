@@ -9,10 +9,12 @@ from pybricks.media.ev3dev import SoundFile, ImageFile
 
 esquerda = Motor(Port.B)
 direita = Motor(Port.C)
+MotorMA = Motor(Port.A)
+MotorMD = Motor(Port.D)
 EsqCor = ColorSensor(Port.S1)
 DirCor = ColorSensor(Port.S4)
 
-gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=90) #Ajustar valores
+gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) #Ajustar valores
 
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
@@ -57,6 +59,5 @@ def Acelera(qp_max, qf):
         gabriel.drive(vec_array[i],0)
         wait(dt*1000)
 
-ev3.speaker.beep()
 
-Acelera(600, 600)
+ev3.speaker.beep()
