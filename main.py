@@ -14,7 +14,7 @@ MotorMD = Motor(Port.D)
 EsqCor = ColorSensor(Port.S1)
 DirCor = ColorSensor(Port.S4)
 
-gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) #Ajustar valores
+gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) 
 
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
