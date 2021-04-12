@@ -15,7 +15,7 @@ MotorMD = Motor(Port.D)
 # EsqCor = ColorSensor(Port.S1)
 # DirCor = ColorSensor(Port.S4)
 
-gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) #Ajustar valores
+gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=172) #Ajustar valores
 ev3 = EV3Brick()
 
 
@@ -57,10 +57,13 @@ def latencia():
 
 #Codigo saida 3
 
+Acelera_e_Curva(600, 1480, 104)
+MotorMA.run(730)
+wait(4200)
+Acelera_e_Curva(450, 600, 0)
+# Acelera_e_Curva(-300, -200, 0)
+# MotorMA.run(-900)
 
 
-# Acelera_e_Curva(1, 1, 55) # Vira em direção a Boccia
-# Acelera_e_Curva(600, 760, -55) # Anda ate o Boccia
-# Acelera_e_Curva(600, 450, 0)
-# Acelera_e_Curva(1, 1, 20)
-# Acelera_e_Curva(250, 50, 0)
+#pra descer os blocos é negativo (MotorMD.run(-400))
+#descer a garra do robo MotorMA.run(400)

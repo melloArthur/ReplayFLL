@@ -59,7 +59,6 @@ def latencia():
 # Codigo saida 4
 Acelera_e_Curva(250, 380, 22) # Anda ate o banco e derruba o banco, levanta o encosto, coloca o projeto inovador no lugar e coloca as 4 bolsas de saude no lugar
 Acelera_e_Curva(350, 20, -10) # Derruba os 4 cubos em seus respectivos lugares
-Acelera_e_Curva(350, 10, 10)
 Acelera_e_Curva(-450, -330, -47) # Volta pra base e vira em direção a pista de dança
 Acelera_e_Curva(650, 960, 43) # Anda em diração a pista de dança e faz a curva na exata direção da pista de dança
 Acelera_e_Curva(200, 90, 0) # Anda para dentro da pista de dança
