@@ -89,7 +89,7 @@ def latencia():
 # for i in range(4):
 #     gabriel.turn(45) #Dansa gatinho dansa
 #     latencia()
-#     gabriel.turn(-45) #só um teste po
+#     gabriel.turn(-45) #só um teste p
 #     latencia()
 
 
