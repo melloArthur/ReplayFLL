@@ -12,14 +12,16 @@ esquerda = Motor(Port.B, Direction.COUNTERCLOCKWISE)
 direita = Motor(Port.C, Direction.COUNTERCLOCKWISE)
 MotorMA = Motor(Port.A)
 MotorMD = Motor(Port.D)
-# EsqCor = ColorSensor(Port.S1)
-# DirCor = ColorSensor(Port.S4)
-
-gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) #Ajustar valores
-ev3 = EV3Brick()
+melhorSensor = GyroSensor(Port.S2)
 
 
-def Acelera_e_Curva(qp_max, qf, ang):
+# ev3 = EV3Brick()
+
+
+gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2)
+
+
+def Acelera(qp_max, qf):
     
     
     # dados iniciais ----------------------
@@ -47,24 +49,59 @@ def Acelera_e_Curva(qp_max, qf, ang):
 
     # loop do movimento
     for i in range(0, len(vec_array)):
-        gabriel.drive(vec_array[i],0)
+        esquerda.run(vec_array[i])
+        direita.run(vec_array[i])
         wait(dt*1000)
-    else:
-        gabriel.turn(ang)
-
-def latencia():
-    wait(200)
 
 
-# Codigo saida 4
-Acelera_e_Curva(250, 380, 22) # Anda ate o banco e derruba o banco, levanta o encosto, coloca o projeto inovador no lugar e coloca as 4 bolsas de saude no lugar
-Acelera_e_Curva(350, 20, -10) # Derruba os 4 cubos em seus respectivos lugares
-Acelera_e_Curva(-450, -330, -47) # Volta pra base e vira em direção a pista de dança
-Acelera_e_Curva(650, 960, 43) # Anda em diração a pista de dança e faz a curva na exata direção da pista de dança
-Acelera_e_Curva(200, 90, 0) # Anda para dentro da pista de dança
-for i in range(4): #O robo dança na pista de dança
+def Curva(qp_max, ang, direction='left'): # direction is 'left' or 'right'
 
-    gabriel.turn(45) 
-    latencia()
-    gabriel.turn(-45) 
-    latencia()
+    # Dados iniciais 
+    qf = ((2 * 3.14 * 77.72)*ang)/360
+    qi     =    0               # Posição inicial (em mm)
+    
+    # Primeiro cálculo
+    Dq =  qf - qi           # Variação da posição (distância, em mm)
+    
+    # Determinação das outras variáveis 
+    tf = 15*Dq/(8*qp_max)       # Tempo do movimento
+    a3 = 16*qp_max/(3*tf**2)
+    a4 = -8*qp_max/(tf**3)
+    a5 = 16*qp_max/(5*tf**4)
+    
+    # Inicio do tempo
+    t = 0
+    dt = 0.01
+    vec_array = []
+    
+    # Loop do cálculo dos valores de velocidade
+    while t < tf:
+        qp = round(3*a3*t**2 + 4*a4*t**3 + (5*a5*t**4), 2)
+        t += dt
+        vec_array.append(qp)
+
+    # Loop do movimento
+
+    # From https://docs.pybricks.com/en/latest/ev3devices.html#motors
+    # --->>>>>> run_time(speed, time, then=Stop.HOLD, wait=True)
+            # speed (rotational speed: deg/s) – Speed of the motor.
+            # time (time: ms) – Duration of the maneuver.
+            # then (Stop) – What to do after coming to a standstill.
+                # Using a new mode from https://docs.pybricks.com/en/latest/parameters/stop.html
+                # ---->>>>>>> Stop.COAST (Let the motor move freely) 
+            # wait (bool) – Wait for the maneuver to complete before continuing with the rest of the program.
+                # The first is False for simultaneus moviment
+
+    for i in range(0, len(vec_array)-1):
+        if direction == 'left':
+            esquerda.run(vec_array[i])
+            direita.run(-vec_array[i])
+            wait(dt*1000)
+        elif direction == 'right':
+            esquerda.run(-vec_array[i])
+            direita.run(vec_array[i])
+            wait(dt*1000)
+
+        else:
+            esquerda.HOLD()
+            direita.HOLD()

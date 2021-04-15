@@ -12,11 +12,13 @@ esquerda = Motor(Port.B, Direction.COUNTERCLOCKWISE)
 direita = Motor(Port.C, Direction.COUNTERCLOCKWISE)
 MotorMA = Motor(Port.A)
 MotorMD = Motor(Port.D)
+melhorSensor = GyroSensor(Port.S2)
 
 
-gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2) #Ajustar valores (axeltrack 172????)
-ev3 = EV3Brick()
+# ev3 = EV3Brick()
 
+
+gabriel = DriveBase(esquerda, direita, wheel_diameter=100,axle_track=166.2)
 
 
 def Acelera(qp_max, qf):
@@ -47,8 +49,10 @@ def Acelera(qp_max, qf):
 
     # loop do movimento
     for i in range(0, len(vec_array)):
-        gabriel.drive(vec_array[i],0)
+        esquerda.run(vec_array[i])
+        direita.run(vec_array[i])
         wait(dt*1000)
+
 
 def Curva(qp_max, ang, direction='left'): # direction is 'left' or 'right'
 
@@ -102,19 +106,8 @@ def Curva(qp_max, ang, direction='left'): # direction is 'left' or 'right'
             esquerda.HOLD()
             direita.HOLD()
 
-def latencia():
-    wait(200)
 
-#Codigo saida 3
-
-Acelera(600, 1480)
-Curva(300, 104, 'right  ')
-MotorMA.run(730)
-wait(4200)
-Acelera(450, 600)
-# Acelera_e_Curva(-300, -200, 0)
-# MotorMA.run(-900)
-
-
-#pra descer os blocos é negativo (MotorMD.run(-400))
-#descer a garra do robo MotorMA.run(400)
+Acelera(300, 100)
+Curva(300, 360, 'left')
+Acelera(300, 100)
+Curva(300, 360, 'right')
