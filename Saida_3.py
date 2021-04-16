@@ -102,19 +102,12 @@ def Curva(qp_max, ang, direction='left'): # direction is 'left' or 'right'
             esquerda.HOLD()
             direita.HOLD()
 
-def latencia():
-    wait(200)
 
 #Codigo saida 3
 
-Acelera(600, 1480)
-Curva(300, 104, 'right  ')
-MotorMA.run(730)
-wait(4200)
-Acelera(450, 600)
-# Acelera_e_Curva(-300, -200, 0)
-# MotorMA.run(-900)
-
-
+Curva(300, 36, 'left')
+Acelera(600, 950)
+Curva(300, 60, 'right')
+Acelera(-150, -150)
 #pra descer os blocos é negativo (MotorMD.run(-400))
 #descer a garra do robo MotorMA.run(400)

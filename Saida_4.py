@@ -105,3 +105,23 @@ def Curva(qp_max, ang, direction='left'): # direction is 'left' or 'right'
         else:
             esquerda.HOLD()
             direita.HOLD()
+
+
+
+# Codigo saida 4
+Acelera(250, 380) # Anda ate o banco e derruba o banco, levanta o encosto, coloca o projeto inovador no lugar e coloca as 4 bolsas de saude no lugar
+
+Curva(300, 22, 'left')
+Acelera(350, 20) # Derruba os 4 cubos em seus respectivos lugares
+Curva(300, 10, 'left')
+Acelera(-450, -330) # Volta pra base e vira em direção a pista de dança
+Curva(300, 47, 'right')
+Acelera(650, 960) # Anda em diração a pista de dança e faz a curva na exata direção da pista de dança
+Curva(300, 43, 'left')
+Acelera(200, 150) # Anda para dentro da pista de dança
+for i in range(4): #O robo dança na pista de dança
+
+    Curva(300, 45, 'right') 
+    wait(500)
+    Curva(300, 45, 'left')
+    wait(500)

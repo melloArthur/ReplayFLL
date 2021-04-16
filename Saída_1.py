@@ -108,6 +108,8 @@ def Curva(qp_max, ang, direction='left'): # direction is 'left' or 'right'
 
 
 Acelera(600, 1480)
-MotorMA.run(-600)
-wait(1000)
-Curva(300, 90, 'right')
+MotorMA.run_time(-1000, 2500)
+Curva(100, 90, 'right')
+MotorMA.run_time(1000, 2500)
+Acelera(-200, -200)
+Curva(300, 90, 'left')
